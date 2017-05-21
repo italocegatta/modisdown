@@ -13,3 +13,4 @@ Imports: dplyr,
     httr,
     stringr,
     methods
+RoxygenNote: 6.0.1
