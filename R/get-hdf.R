@@ -2,7 +2,7 @@
 #'
 #' @export
 #'
-modis_download_hdf <- function(tile, start, end, path = NULL) {
+modis_download_hdf <- function(tile, start, end, path = ".", satellites = c("terra", "aqua")) {
 
   # check and extract tiles detas
   start <- check_date(start)
@@ -18,6 +18,7 @@ modis_download_hdf <- function(tile, start, end, path = NULL) {
     dplyr::mutate(scene_path = purrr::map2_chr(exact_date, scene_name, get_scene_path))
 
   for (i in seq_len(nrow(scene_info))) {
+
     print(stringr::str_glue(
       "scene: {i} {scene_info$scene_name[i]}, start: {Sys.time()}"
     ))
@@ -28,6 +29,7 @@ modis_download_hdf <- function(tile, start, end, path = NULL) {
       scene_info$exact_date[i],
       path
     )
+
   }
 }
 

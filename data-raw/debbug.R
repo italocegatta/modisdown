@@ -19,5 +19,6 @@ scene <- scene_name
 path = "teste"
 date <- exact_date
 
+satellites = c("terra", "aqua")
 
 modis_download_hdf(tile, start, end, path)

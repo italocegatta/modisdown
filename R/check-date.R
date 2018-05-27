@@ -31,12 +31,19 @@ check_date <- function(x) {
   return(d)
 }
 
-get_exact_date <- function(start, end) {
-  aval_d <- mod13_avaliable_days()
+get_exact_date <- function(start, end, satellites) {
 
-  # testar se start é maior que end
-  # start_d <- aval_d[which.min(abs(start - aval_d))]
-  # end_d <- aval_d[which.min(abs(end - aval_d))]
+  aval_d <- list(terra = NULL, aqua = NULL)
+
+  if (any(stringr::str_detect(satellites, "terra"))) {
+    aval_d[["terra"]] <- mod13_avaliable_days()
+  }
+
+  if (any(stringr::str_detect(satellites, "aqua"))) {
+    aval_d[["aqua"]] <- myd13_avaliable_days()
+  }
+
+  aval_d <- c(aval_d$terra, aval_d$aqua)
 
   aval_d[aval_d >= start & aval_d <= end]
 }
