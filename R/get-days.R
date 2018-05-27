@@ -1,7 +1,3 @@
-#' Get MOD13 avaiables days
-#'
-#' @export
-#'
 mod13_avaliable_days <- function() {
 
   page <- xml2::read_html("http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.006")
