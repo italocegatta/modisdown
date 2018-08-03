@@ -20,9 +20,9 @@ modis_download_hdf <- function(tile, start, end, path = ".", satellites = c("ter
 
   for (i in seq_len(nrow(scene_info))) {
 
-    print(stringr::str_glue(
-      "scene: {i} {scene_info$scene_name[i]}, start: {Sys.time()}"
-    ))
+    cat(
+      stringr::str_glue("scene {i}: {scene_info$scene_name[i]}, start: {Sys.time()}"), "\n"
+    )
 
     get_scene_hdf(
       scene_info$scene_name[i],
@@ -68,16 +68,28 @@ get_scene_hdf <- function(scene_name, scene_path, exact_date, path) {
 
   date_out <- base::format.Date(lubridate::as_date(exact_date), "%Y.%m.%d")
 
-  if (!dir.exists(path)) dir.create(path)
-  if (!dir.exists(file.path(path, date_out))) dir.create(file.path(path, date_out))
+  if (!dir.exists(path)) {
+    dir.create(path)
+  }
+
+  if (!dir.exists(file.path(path, date_out))) {
+    dir.create(file.path(path, date_out))
+  }
 
   filename <- file.path(path, date_out, scene_name)
 
-  httr::GET(
-    scene_path,
-    httr::authenticate("Tecnologia", "Tec123456"),
-    httr::write_disk(filename, overwrite = TRUE),
-    httr::progress()
-  )
+  if (file.exists(filename)) {
+
+    cat("file already exists\n")
+
+  } else {
+
+    httr::GET(
+      scene_path,
+      httr::authenticate("Tecnologia", "Tec123456"),
+      httr::write_disk(filename, overwrite = TRUE),
+      httr::progress()
+    )
+  }
 }
 
