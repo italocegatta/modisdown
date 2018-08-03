@@ -73,7 +73,11 @@ get_scene_hdf <- function(scene_name, scene_path, exact_date, path) {
 
   filename <- file.path(path, date_out, scene_name)
 
-  temp <- httr::GET(scene_path, httr::authenticate("Tecnologia", "Tec123456"), httr::progress())
-  writeBin(httr::content(temp, "raw"), filename)
+  httr::GET(
+    scene_path,
+    httr::authenticate("Tecnologia", "Tec123456"),
+    httr::write_disk(filename, overwrite = TRUE),
+    httr::progress()
+  )
 }
 
