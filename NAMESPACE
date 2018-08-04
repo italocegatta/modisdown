@@ -3,4 +3,5 @@
 export("%>%")
 export(get_tiles)
 export(modis_download_hdf)
+export(modis_extract_bands)
 importFrom(magrittr,"%>%")

@@ -21,7 +21,8 @@ modis_download_hdf <- function(tile, start, end, path = ".", satellites = c("ter
   for (i in seq_len(nrow(scene_info))) {
 
     cat(
-      stringr::str_glue("scene {i}: {scene_info$scene_name[i]}, start: {Sys.time()}"), "\n"
+      format.Date(lubridate::as_date(scene_info$exact_date[i]), "%Y.%m.%d"),
+      scene_info$scene_name[i], "\n"
     )
 
     get_scene_hdf(
