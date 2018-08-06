@@ -2,7 +2,7 @@
 #'
 #' @export
 #'
-modis_extract_bands <- function(path_hdr, path_tiff, bands = c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), path_mrt = "C:/MRT") {
+modis_extract_bands <- function(path_hdr, path_tiff, bands = c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1), path_mrt = "C:/MRT") {
 
   file <- list.files(path = path_hdr, pattern = ".hdf", recursive = T)
 
@@ -19,6 +19,8 @@ modis_extract_bands <- function(path_hdr, path_tiff, bands = c(1, 0, 0, 0, 0, 0,
     base_file <- param_base
 
     base_file[2] <- paste0(base_file[2], path_full_in[i])
+
+    base_file[4] <- stringr::str_glue('SPECTRAL_SUBSET = ( {paste(bands, collapse = " ")} )')
 
     base_file[8] <- paste0(base_file[8], path_full_out[i])
 
