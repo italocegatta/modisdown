@@ -12,13 +12,13 @@ modis_download_hdf <- function(tile, start, end, path = ".", satellites = c("ter
 
   exact_date <- get_exact_date(start, end, satellites)
   
-  future::plan(future::multiprocess)
+  # future::plan(future::multiprocess)
   
   # get infos for download
   scene_info <- dplyr::data_frame(exact_date, satellite = names(exact_date)) %>%
     tidyr::crossing(tile) %>%
-    dplyr::mutate(scene_name = furrr::future_pmap_chr(list(exact_date, tile, satellite), get_scene_name)) %>%
-    dplyr::mutate(scene_path = furrr::future_pmap_chr(list(exact_date, scene_name, satellite), get_scene_path))
+    dplyr::mutate(scene_name = purrr::pmap_chr(list(exact_date, tile, satellite), get_scene_name)) %>%
+    dplyr::mutate(scene_path = purrr::pmap_chr(list(exact_date, scene_name, satellite), get_scene_path))
 
   for (i in seq_len(nrow(scene_info))) {
 
