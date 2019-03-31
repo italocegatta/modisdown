@@ -4,8 +4,8 @@
 \alias{modis_extract_bands}
 \title{Extract bands from MODIS HDF file}
 \usage{
-modis_extract_bands(path_hdr, path_tiff, bands = c(1, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0), path_mrt = "C:/MRT")
+modis_extract_bands(path_hdr, path_tiff, bands = c(1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 1), path_mrt = "C:/MRT")
 }
 \description{
 Extract bands from MODIS HDF file

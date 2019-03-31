@@ -4,8 +4,8 @@
 \alias{modis_download_hdf}
 \title{Get MOD13 hdf}
 \usage{
-modis_download_hdf(tile, start, end, path = ".", satellites = c("terra",
-  "aqua"))
+modis_download_hdf(tile, start, end, path = ".",
+  satellites = c("terra", "aqua"))
 }
 \description{
 Get MOD13 hdf
